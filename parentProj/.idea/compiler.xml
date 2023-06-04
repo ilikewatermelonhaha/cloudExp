@@ -11,10 +11,17 @@
         <module name="Eureka_Server_12001" />
         <module name="Eureka_Server_12000" />
         <module name="Service_Provider_11001" />
+        <module name="Gateway_13000" />
         <module name="Service_Provider_11000" />
         <module name="Service_Provider_11011" />
+        <module name="Config_Center_14000" />
+        <module name="Config_Center_14001" />
         <module name="Service_Provider_11010" />
+        <module name="Config_Center_14002" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="configCenter14000" target="19" />
+    </bytecodeTargetLevel>
   </component>
 </project>

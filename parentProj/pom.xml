@@ -17,6 +17,10 @@
         <module>Service_Consumer_10001</module>
         <module>Eureka_Server_12000</module>
         <module>Eureka_Server_12001</module>
+        <module>Config_Center_14000</module>
+        <module>Config_Center_14001</module>
+        <module>Config_Center_14002</module>
+        <module>Gateway_13000</module>
     </modules>
 
     <properties>
@@ -45,4 +49,16 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>19</source>
+                    <target>19</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

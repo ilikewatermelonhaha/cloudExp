@@ -1,5 +1,7 @@
 package org.exp.controller;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import org.exp.loadbalancer.CustomLoadBalanceConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
@@ -17,7 +19,22 @@ public class HelloController {
     private UserFeignService userFeignService;
 
     @GetMapping("/hello")
-    public String hello(){
+    @CircuitBreaker(name="backendA",fallbackMethod="fallback")
+    @RateLimiter(name = "myRateLimiter",fallbackMethod = "fallbackRateLimit")
+    public String hello() throws InterruptedException {
+        System.out.println("enter function!");
+        Thread.sleep(100L);
+        System.out.println("exit function!");
         return userFeignService.Hello();
+    }
+    public String fallback(Throwable e){
+        e.printStackTrace();
+        System.out.println("fallback running!");
+        return "service not available";
+    }
+    public String fallbackRateLimit(Throwable e){
+        e.printStackTrace();
+        System.out.println("ratelimiter fallback running!");
+        return "service not available";
     }
 }
